@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="ACOS3_SmartCardManager_Library">
+  <ClassDiagramComponents>
+    <Class name="ACOS3_SmartCardManager_Library" package="acos3_smartcardmanager_library" visibility="public" xPosition="34.0" yPosition="20.0">
+      <Fields>
+        <Field name="PIN_CODE" type="byte[]" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="IC_CODE" type="byte[]" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="String[]" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="CardManager" package="acos3_smartcardmanager_library" visibility="public" xPosition="-41.0" yPosition="-680.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="CardTerminal" name="ct"/>
+          <Argument type="byte[]" name="IC_CODE"/>
+          <Argument type="byte[]" name="PIN_CODE"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="SubmitIC" returnType="boolean" visibility="public"/>
+        <Method name="SubmitPIN" returnType="boolean" visibility="public"/>
+        <Method name="ClearCard" returnType="boolean" visibility="public"/>
+        <Method name="ResetConnection" returnType="void" visibility="public"/>
+        <Method name="SelectFF02" returnType="boolean" visibility="public"/>
+        <Method name="SelectFF03" returnType="boolean" visibility="public"/>
+        <Method name="SelectFF04" returnType="boolean" visibility="public"/>
+        <Method name="SelectFile" returnType="byte[]" visibility="public">
+          <Argument type="byte[]" name="fileID"/>
+        </Method>
+        <Method name="WriteRecord" returnType="byte[]" visibility="public">
+          <Argument type="byte" name="recNo"/>
+          <Argument type="byte" name="Len"/>
+          <Argument type="byte[]" name="data"/>
+        </Method>
+        <Method name="ReadRecord" returnType="byte" visibility="public">
+          <Argument type="byte" name="recNo"/>
+          <Argument type="byte" name="Len"/>
+        </Method>
+        <Method name="__ReadRecord" returnType="byte" visibility="public">
+          <Argument type="byte" name="recNo"/>
+          <Argument type="byte" name="Len"/>
+        </Method>
+        <Method name="CreateNewFile" returnType="SecAttrib" visibility="public">
+          <Argument type="byte[]" name="fileID"/>
+          <Argument type="byte" name="nbRecords"/>
+          <Argument type="byte" name="recLength"/>
+          <Argument type="SecAttrib" name="readSecAttrib"/>
+          <Argument type="SecAttrib" name="writeSecAttrib"/>
+        </Method>
+        <Method name="SetPINCode" returnType="byte[]" visibility="public">
+          <Argument type="byte[]" name="pin_code"/>
+        </Method>
+        <Method name="GetPINCOde" returnType="byte[]" visibility="public"/>
+        <Method name="secAttribToByte" returnType="SecAttrib" visibility="public">
+          <Argument type="SecAttrib" name="sa"/>
+        </Method>
+        <Method name="Connect" returnType="boolean" visibility="public"/>
+        <Method name="isCardNUll" returnType="boolean" visibility="public"/>
+        <Method name="Disconnect" returnType="void" visibility="public"/>
+        <Method name="GetATR" returnType="String" visibility="public"/>
+        <Method name="getN_OF_FILE" returnType="byte" visibility="public"/>
+        <Method name="setCard" returnType="Card" visibility="public">
+          <Argument type="Card" name="myCard"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Enum name="SecAttrib" package="" visibility="public" xPosition="78.0" yPosition="230.0">
+      <Literals>
+        <Literal name="IC_sec"/>
+        <Literal name="PIN_sec"/>
+        <Literal name="AC5_sec"/>
+        <Literal name="AC4_sec"/>
+        <Literal name="AC3_sec"/>
+        <Literal name="AC2_sec"/>
+        <Literal name="AC1_sec"/>
+        <Literal name="AC0_sec"/>
+        <Literal name="NONE_sec"/>
+      </Literals>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations/>
+</ClassDiagram>

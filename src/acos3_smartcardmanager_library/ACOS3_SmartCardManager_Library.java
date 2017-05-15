@@ -42,19 +42,32 @@ public class ACOS3_SmartCardManager_Library {
         if (term.isCardPresent()) {
             System.out.println(term.getName() + " -->> CARD IS PRESENT");
             
-            CardManager cmgr = new CardManager(term, IC_CODE, PIN_CODE);
+            // EXAMPLE OBJECTIVE: Create a file named 0A0A
+            //                    Containing 2 records
+            //                    With 8 bytes of record length
+            //                    Read Access using PIN code
+            //                    Write Access using IC code
             
-            cmgr.Connect();
-            
-            System.out.println(cmgr.GetATR());
-            
-            cmgr.SubmitIC();
-            
-            cmgr.SelectFF02();
-            
-            cmgr.Disconnect();
+            CardManager manager = new CardManager(term, IC_CODE, PIN_CODE); // Automatic connection
+            System.out.println(manager.GetATR());
+            manager.ClearCard();
+            manager.ResetConnection();
+            manager.SetPINCode(PIN_CODE);
+            //manager.GetPINCOde()
+            manager.ResetConnection();
+
+            // Here we start creation procedure
+            byte[] newfile_id_0A0A = {(byte) 0x0A, (byte) 0x0A};
+            manager.CreateNewFile(newfile_id_0A0A, (byte) 2, (byte) 0x08, CardManager.SecAttrib.PIN_sec, CardManager.SecAttrib.IC_sec);
+            manager.ResetConnection();
+            manager.SubmitIC();
+            manager.SelectFile(newfile_id_0A0A);
+            manager.WriteRecord((byte) 0, (byte) 8, PIN_CODE);
+            manager.WriteRecord((byte) 1, (byte) 8, PIN_CODE);
+
+            manager.Disconnect();
         }
 
     }
-    
+
 }
